@@ -24,19 +24,14 @@ Node.js 8+
 MongoDB 3.6+
 
 #How to Install
-Using Git (recommended)
+Using Git
 Clone the project from github. Change "myproject" to your project name.
 
-Install npm dependencies after installing
+Install yarn dependencies after installing
 cd ~/myproject
 $ yarn
 
-#Setting up environments (development or production)
-In the root this repository you will find a file named .env.example
-Create a new file by copying and pasting the file and then renaming it to just .env
-The file .env is already ignored, so you never commit your credentials.
-Change the values of the file to your environment (development or production)
-Upload the .env to your environment server(development or production)
+#For this purpose you don't need to set environment variables 
 
 #How to run development mode
 cd ~/myproject
@@ -46,9 +41,13 @@ You will know server is running by checking the output of the command yarn dev:
 ---
 
 $ yarn dev
+
 yarn run v1.22.11
+
 $ ts-node-dev --respawn --transpile-only --ignore-watch node_modules server.ts
+
 [INFO] 10:28:19 ts-node-dev ver. 1.1.8 (using ts-node ver. 9.1.1, typescript ver. 4.4.2)
+
 🚀 Server Running
 🚀 Port 4500
 🚀 Mongodb connected
@@ -56,11 +55,6 @@ $ ts-node-dev --respawn --transpile-only --ignore-watch node_modules server.ts
 ---
 
 see the status information in: http://localhost:4500/api/v1
-
-#How to run production mode
-use pm2 (Advanced, production process manager for Node.js) [http://pm2.keymetrics.io/]
-bash
-npm run production
 
 #Usage
 Need new modules? The module contains everything with direct relation. Like a models, controllers, use cases, routes. Create a new path with name of new module, and four paths inside: controllers, models, routes and useCases. 
