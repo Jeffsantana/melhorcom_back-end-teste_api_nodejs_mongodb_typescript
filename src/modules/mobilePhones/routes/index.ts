@@ -7,6 +7,7 @@ MobilePhoneRoutes.post('/phone', MobilePhonesController.create);
 MobilePhoneRoutes.get('/phone/:id', MobilePhonesController.read);
 MobilePhoneRoutes.put('/phone/:id', MobilePhonesController.update);
 MobilePhoneRoutes.delete('/phone/:id', MobilePhonesController.delete);
+MobilePhoneRoutes.get('/phone', MobilePhonesController.list);
 
 
 export default MobilePhoneRoutes;

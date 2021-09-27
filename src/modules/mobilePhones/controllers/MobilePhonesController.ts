@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import MobilePhonesModel from '../models/MobilePhonesModel';
+import ListMobilePhonesUseCase from '../useCases/ListMobilePhonesUseCase';
 
 const onlyAlphanumeric = (data: String, res: Response) => {
     // Alfanumérico com no mínimo 2 e no máximo 255 caracteres, desprezando espaço em branco.
@@ -58,6 +59,7 @@ class MobilePhonesController {
             });
         }
     };
+
     public async read(req: Request, res: Response): Promise<Response> {
         const mobilePhone = await MobilePhonesModel.findOne({ _id: req.params.id });
         if (!mobilePhone) {
@@ -130,10 +132,10 @@ class MobilePhonesController {
         }
     };
 
-    // public async list(req: Request, res: Response): Promise<Response> {
-    //     const mobilePhones = await ListMobilePhonesModelsUseCase.execute(req)
-    //     return res.json(mobilePhones)
-    // }
+    public async list(req: Request, res: Response): Promise<Response> {
+        const mobilePhones = await ListMobilePhonesUseCase.execute(req)
+        return res.json(mobilePhones)
+    }
 
 }
 

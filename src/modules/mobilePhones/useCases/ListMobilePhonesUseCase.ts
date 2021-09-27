@@ -9,6 +9,20 @@ class ListMobilePhonesUseCase {
         const options: any = {};
         page ? options.page = page : options.page = 1
         limit ? options.limit = limit : options.limit = 1
+        if (req.query.search) {
+            if (!filters.$or) filters.$or = [];
+            // @ts-ignore
+            const searchKeys = req.query.search?.split(' ');
+            searchKeys.forEach((key: any) => {
+                filters.$or.push({ model: new RegExp(key, 'i') });
+                filters.$or.push({ price: new RegExp(key, 'i') });
+                filters.$or.push({ brand: new RegExp(key, 'i') });
+                filters.$or.push({ color: new RegExp(key, 'i') });
+            });
+        }
+
+        const mobilePhones = MobilePhonesModel.paginate(filters, options)
+        return mobilePhones;
 
     }
 }
