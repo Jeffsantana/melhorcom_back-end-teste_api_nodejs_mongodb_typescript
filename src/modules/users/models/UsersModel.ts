@@ -1,12 +1,13 @@
-import { Mongoose, Schema, model } from "mongoose";
+import { Schema, model } from "mongoose";
 import mongoosePaginate = require('mongoose-paginate-v2');
 import { hash } from 'bcrypt';
 
 const userSchema = new Schema({
-    active: { type: Boolean, default: false },
+    active: { type: Boolean, default: true },
     name: { type: String, required: true },
     email: { type: String, required: true },
     phone_number: { type: String },
+    // profile: { type: String, default: 'USER' },
     // roles: { type: Schema.Types.ObjectId, ref: 'roles', required: true },
     password: { type: String, required: true, select: false, },
 }, {
