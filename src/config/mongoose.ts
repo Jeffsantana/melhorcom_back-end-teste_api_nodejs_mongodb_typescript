@@ -1,23 +1,10 @@
 import { connect } from "mongoose";
 
 require('dotenv').config();
-
-const databaseConfig = {
-    URI: '',
-    mongooseConfig: {}
-};
-
-
-databaseConfig.URI = `mongodb+srv://${process.env.DEV_DB_USER}:${process.env.DEV_DB_PASS}@${process.env.DEV_DB_HOST}/${process.env.DEV_DB_NAME}?retryWrites=true&w=majority`;
-
-
-databaseConfig.mongooseConfig = {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-};
-const URI = `mongodb://${process.env.DEV_DB_HOST}:${process.env.DEV_DB_PORT}/${process.env.DEV_DB_NAME}`;
+const host = process.env.DEV_DB_HOST ? process.env.DEV_DB_HOST : 'localhost'
+const port = process.env.DEV_DB_PORT ? process.env.DEV_DB_PORT : 27017
+const name = process.env.DEV_DB_NAME ? process.env.DEV_DB_NAME : 'melhorcom'
+const URI = `mongodb://${host}:${port}/${name}`;
 
 const mongoConnect = () => {
 

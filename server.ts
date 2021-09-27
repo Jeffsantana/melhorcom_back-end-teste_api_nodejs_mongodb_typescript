@@ -1,7 +1,7 @@
 import { app } from "./app"
 require('dotenv').config()
-
-app.listen(process.env.PORT, () => {
+const port = process.env.PORT ? process.env.PORT : 4500;
+app.listen(port, () => {
     console.log("🚀 Server Running");
-    console.log("🚀 Port", process.env.PORT);
+    console.log("🚀 Port", port);
 });
