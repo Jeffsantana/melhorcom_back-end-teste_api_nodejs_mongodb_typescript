@@ -26,16 +26,39 @@ const onlyAlphanumeric = (data: String, res: Response) => {
 
 
 }
+
+const onlyColors = (data: String, res: Response) => {
+    switch (data) {
+        case 'BLACK':
+            return data
+            break;
+        case 'WHITE':
+            return data
+            break;
+        case 'GOLD':
+            return data
+            break;
+        case 'PINK':
+            return data
+            break;
+        default:
+            return res.status(400).send({
+                message:
+                    'Invalid expression. Only accepted:BLACK, WHITE, GOLD or PINK. Please fill correct all the form fields and try again or contact support.',
+            });
+
+    }
+}
 class MobilePhonesController {
     public async create(req: Request, res: Response): Promise<Response> {
         try {
+            const model = onlyAlphanumeric(req.body.model, res);
+            const color = onlyColors(req.body.color, res);
             const {
-                model,
                 price,
                 brand,
                 startDate,
                 endDate,
-                color,
                 code,
             } = req.body;
 
@@ -74,14 +97,12 @@ class MobilePhonesController {
     public async update(req: Request, res: Response): Promise<Response> {
         try {
             const model = onlyAlphanumeric(req.body.model, res);
-            // console.log("🚀 ~ MobilePhonesController ~ model", model);
+            const color = onlyColors(req.body.color, res);
             const {
-                // model,
                 price,
                 brand,
                 startDate,
                 endDate,
-                color,
                 code,
             } = req.body;
 
@@ -135,7 +156,7 @@ class MobilePhonesController {
     public async list(req: Request, res: Response): Promise<Response> {
         const mobilePhones = await ListMobilePhonesUseCase.execute(req)
         return res.json(mobilePhones)
-    }
+    };
 
 }
 
