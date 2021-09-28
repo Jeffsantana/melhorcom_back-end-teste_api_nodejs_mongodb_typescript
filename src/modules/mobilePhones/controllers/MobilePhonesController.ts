@@ -142,10 +142,10 @@ class MobilePhonesController {
                 code,
             } = req.body;
 
-            if (!code) {
+            if (!code || code.length > 8) {
                 return res.status(400).send({
                     message:
-                        'Missing code form data. Please fill all the form fields and try again or contact support.',
+                        'Invalid code form data. Please fill all the form fields and try again or contact support.',
                 });
             }
             if (await MobilePhonesModel.findOne({ code })) {
@@ -203,10 +203,10 @@ class MobilePhonesController {
                 code,
             } = req.body;
 
-            if (!code) {
+            if (!code || code.length > 8) {
                 return res.status(400).send({
                     message:
-                        'Missing code on form data. Please fill all the form fields and try again or contact support.',
+                        'Invalid code on form data. Please fill all the form fields and try again or contact support.',
                 });
             }
             if (await MobilePhonesModel.findOne({ _id: { $ne: req.params.id }, code })) {

@@ -11,7 +11,7 @@ all this with typescript
 This is a basic API REST written on JavaScript using async/await. Great for building a starter web API for your front-end (Android, iOS, Vue, react, angular, or anything that can consume an API)
 
 # Features
-Response with Mongoose paginate.
+List Response with Mongoose paginate.
 Standardized Message responses.
 
 
@@ -61,6 +61,8 @@ request get url('http://localhost4500/phone/');
 request put url('http://localhost4500/phone/');
 request delete url('http://localhost4500/phone/');
 request get url('http://localhost4500/phone');
+
+
 
 
 
