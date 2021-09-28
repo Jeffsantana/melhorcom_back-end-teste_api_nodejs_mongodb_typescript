@@ -27,15 +27,18 @@ $ git clone https://github.com/Jeffsantana/melhorcom_back-end-teste_api_nodejs_m
 
 Install yarn dependencies after installing
 
-cd ~/melhorcom_back-end-teste_api_nodejs_mongodb_typescript
+$ cd ~/melhorcom_back-end-teste_api_nodejs_mongodb_typescript
 
 $ yarn
 
 #For this purpose you don't need to set environment variables 
 
 #How to run development mode
-cd ~/melhorcom_back-end-teste_api_nodejs_mongodb_typescript
-yarn dev
+
+$ cd ~/melhorcom_back-end-teste_api_nodejs_mongodb_typescript
+
+$ yarn dev
+
 You will know server is running by checking the output of the command yarn dev:
 
 ---
@@ -49,7 +52,9 @@ $ ts-node-dev --respawn --transpile-only --ignore-watch node_modules server.ts
 [INFO] 10:28:19 ts-node-dev ver. 1.1.8 (using ts-node ver. 9.1.1, typescript ver. 4.4.2)
 
 🚀 Server Running
+
 🚀 Port 4500
+
 🚀 Mongodb connected
 
 ---
@@ -59,22 +64,38 @@ Using a restful client test
 if you using Insomnia downloading this .json and import on the app https://drive.google.com/file/d/1AyQgWcsPjYj1AA-4jqF4c27gmeDg73QX/view?usp=sharing
 
 or anything that can consume an API
+
 the implemented endpoints are: 
+
 request post url('http://localhost4500/phone');
+
 request get url('http://localhost4500/phone/:id');
+
 request put url('http://localhost4500/phone/:id');
+
 request delete url('http://localhost4500/phone/:id');
+
 request get url('http://localhost4500/phone');
 
+
 for post or put request send a JSON on request body like:
+
  data: {
+
     model: string,
+
     price: number,
+
     brand: string,
+
     color: string,
+
     code: string,
+
     startDate: string,
+
     endDate: string,
+    
   }
 
 
