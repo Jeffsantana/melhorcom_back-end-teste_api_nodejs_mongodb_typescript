@@ -30,21 +30,21 @@ const onlyAlphanumeric = (data: String, res: Response) => {
 const onlyColors = (data: String, res: Response) => {
     switch (data) {
         case 'BLACK':
-            return data
+            return data.toUpperCase()
             break;
         case 'WHITE':
-            return data
+            return data.toUpperCase()
             break;
         case 'GOLD':
-            return data
+            return data.toUpperCase()
             break;
         case 'PINK':
-            return data
+            return data.toUpperCase()
             break;
         default:
             return res.status(400).send({
                 message:
-                    'Invalid expression. Only accepted:BLACK, WHITE, GOLD or PINK. Please fill correct all the form fields and try again or contact support.',
+                    'Invalid expression. Only Colors accepted is: BLACK, WHITE, GOLD or PINK. Please fill correct all the form fields and try again or contact support.',
             });
 
     }
@@ -54,11 +54,11 @@ class MobilePhonesController {
         try {
             const model = onlyAlphanumeric(req.body.model, res);
             const color = onlyColors(req.body.color, res);
+            const startDate = req.body.startDate ? new Date(req.body.startDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3")) : ''
+            const endDate = req.body.endDate ? new Date(req.body.endDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3")) : ''
             const {
                 price,
                 brand,
-                startDate,
-                endDate,
                 code,
             } = req.body;
 
@@ -73,7 +73,15 @@ class MobilePhonesController {
                     .status(400)
                     .send({ message: 'this code already registered.' });
             }
-            const mobilePhone = await MobilePhonesModel.create(req.body);
+            const mobilePhone = await MobilePhonesModel.create({
+                model,
+                color,
+                startDate,
+                price,
+                brand,
+                endDate,
+                code,
+            });
 
             return res.status(201).json(mobilePhone);
         } catch (err) {
@@ -98,11 +106,11 @@ class MobilePhonesController {
         try {
             const model = onlyAlphanumeric(req.body.model, res);
             const color = onlyColors(req.body.color, res);
+            const startDate = req.body.startDate ? new Date(req.body.startDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3")) : ''
+            const endDate = req.body.endDate ? new Date(req.body.endDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3")) : ''
             const {
                 price,
                 brand,
-                startDate,
-                endDate,
                 code,
             } = req.body;
 
@@ -132,8 +140,6 @@ class MobilePhonesController {
             );
 
             return res.status(204).send();
-
-
 
         } catch (err) {
             return res.status(400).send({
