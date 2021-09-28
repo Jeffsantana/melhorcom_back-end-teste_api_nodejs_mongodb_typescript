@@ -1,6 +1,7 @@
 # api_node_mongodb_typescript
 # Teste de Back-End (NodeJS)
 Api developed for back end test of melhorcom (https://melhorcom.com.br/)
+
 That's a fork from https://github.com/Jeffsantana/api_node_mongodb_typescript
 
 Starter API REST with Node.js, express.js, JWT, Mongoose and MongoDB
@@ -21,10 +22,13 @@ MongoDB 3.6+
 
 #How to Install
 Using Git
+
 $ git clone https://github.com/Jeffsantana/melhorcom_back-end-teste_api_nodejs_mongodb_typescript 
 
 Install yarn dependencies after installing
+
 cd ~/melhorcom_back-end-teste_api_nodejs_mongodb_typescript
+
 $ yarn
 
 #For this purpose you don't need to set environment variables 
