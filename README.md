@@ -19,6 +19,7 @@ Standardized Message responses.
 #Requirements
 Node.js 14+
 MongoDB 3.6+
+Yarn v1.22.5+
 
 #How to Install
 Using Git
@@ -95,7 +96,7 @@ for post or put request send a JSON on request body like:
     startDate: string,
 
     endDate: string,
-    
+
   }
 
 
