@@ -57,11 +57,21 @@ if you using Insomnia downloading this .json and import on the app https://drive
 or anything that can consume an API
 the implemented endpoints are: 
 request post url('http://localhost4500/phone');
-request get url('http://localhost4500/phone/');
-request put url('http://localhost4500/phone/');
-request delete url('http://localhost4500/phone/');
+request get url('http://localhost4500/phone/:id');
+request put url('http://localhost4500/phone/:id');
+request delete url('http://localhost4500/phone/:id');
 request get url('http://localhost4500/phone');
 
+for post or put request send a JSON on request body like:
+ data: {
+    model: string,
+    price: number,
+    brand: string,
+    color: string,
+    code: string,
+    startDate: string,
+    endDate: string,
+  }
 
 
 
