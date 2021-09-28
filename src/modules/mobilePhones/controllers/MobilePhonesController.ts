@@ -112,6 +112,7 @@ const adequationDate = (data: string) => {
     }
 };
 
+// Data no formato “dd/MM/yyyy na listagem de vários objetos”
 const mobilePhoneFixedDate = (data: Any) => {
     const newMobilePhone = {
         model: data.model,
@@ -131,7 +132,6 @@ const mobilePhoneFixedDate = (data: Any) => {
 class MobilePhonesController {
     public async create(req: Request, res: Response): Promise<Response> {
         try {
-
             const model = onlyAlphanumeric(req.body.model, res);
             const price = onlyPositivePrice(req.body.price, res);
             const brand = onlyAlphanumeric(req.body.brand, res);
@@ -145,7 +145,7 @@ class MobilePhonesController {
             if (!code) {
                 return res.status(400).send({
                     message:
-                        'Missing form data. Please fill all the form fields and try again or contact support.',
+                        'Missing code form data. Please fill all the form fields and try again or contact support.',
                 });
             }
             if (await MobilePhonesModel.findOne({ code })) {
@@ -194,19 +194,19 @@ class MobilePhonesController {
     public async update(req: Request, res: Response): Promise<Response> {
         try {
             const model = onlyAlphanumeric(req.body.model, res);
+            const price = onlyPositivePrice(req.body.price, res);
+            const brand = onlyAlphanumeric(req.body.brand, res);
+            const startDate = req.body.startDate ? validStartDate(req.body.startDate, res) : ''
+            const endDate = req.body.endDate ? validEndDate(req.body.startDate, req.body.endDate, res) : ''
             const color = onlyColors(req.body.color, res);
-            const startDate = req.body.startDate ? new Date(req.body.startDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3")) : ''
-            const endDate = req.body.endDate ? new Date(req.body.endDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3")) : ''
             const {
-                price,
-                brand,
                 code,
             } = req.body;
 
             if (!code) {
                 return res.status(400).send({
                     message:
-                        'Missing form data. Please fill all the form fields and try again or contact support.',
+                        'Missing code on form data. Please fill all the form fields and try again or contact support.',
                 });
             }
             if (await MobilePhonesModel.findOne({ _id: { $ne: req.params.id }, code })) {
@@ -239,8 +239,8 @@ class MobilePhonesController {
 
     public async delete(req: Request, res: Response): Promise<Response> {
         try {
-            const mobilePhone = await MobilePhonesModel.findByIdAndDelete(req.params.id);
-            return res.send(mobilePhone);
+            await MobilePhonesModel.findByIdAndDelete(req.params.id);
+            return res.status(204).send();
         } catch (err) {
             return res.status(400).send({
                 message: 'Error deleting Mobile Phone. Please try again or contact support.',
@@ -250,7 +250,20 @@ class MobilePhonesController {
 
     public async list(req: Request, res: Response): Promise<Response> {
         const mobilePhones = await ListMobilePhonesUseCase.execute(req)
-        return res.json(mobilePhones)
+        const adequationMobilePhones = {
+            docs: mobilePhones.docs.map(doc => mobilePhoneFixedDate(doc)),
+            totalDocs: mobilePhones.totalDocs,
+            limit: mobilePhones.limit,
+            totalPages: mobilePhones.totalPages,
+            page: mobilePhones.page,
+            pagingCounter: mobilePhones.pagingCounter,
+            hasPrevPage: mobilePhones.hasPrevPage,
+            hasNextPage: mobilePhones.hasNextPage,
+            prevPage: mobilePhones.prevPage,
+            nextPage: mobilePhones.nextPage
+
+        }
+        return res.json(adequationMobilePhones)
     };
 
 }
